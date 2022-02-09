@@ -1,0 +1,16 @@
+f{
+  "sites": [
+    {
+      "site_id": 1,
+      "latitude": 16.268728488224802,
+      "longitude": 83.69486747387447,
+      "composition": "stony"
+    },
+    {
+      "site_id": 2,
+      "latitude": 16.510138051478844,
+      "longitude": 82.99087017418388,
+      "composition": "iron"
+    }
+  ]
+}

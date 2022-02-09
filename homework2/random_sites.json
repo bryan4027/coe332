@@ -1,0 +1,64 @@
+{
+  "sites": [
+    {
+      "site_id": 1,
+      "latitude": 16.268728488224802,
+      "longitude": 83.69486747387447,
+      "composition": "stony"
+    },
+    {
+      "site_id": 2,
+      "latitude": 16.510138051478844,
+      "longitude": 82.99087017418388,
+      "composition": "iron"
+    },
+    {
+      "site_id": 3,
+      "latitude": 16.944490487152233,
+      "longitude": 82.75923044664745,
+      "composition": "stony"
+    },
+    {
+      "site_id": 4,
+      "latitude": 16.18771917354847,
+      "longitude": 82.05669495304402,
+      "composition": "iron"
+    },
+    {
+      "site_id": 5,
+      "latitude": 16.86553413581011,
+      "longitude": 83.52456016491588,
+      "composition": "stony"
+    },
+    {
+      "site_id": 6,
+      "latitude": 17.391665733536886,
+      "longitude": 82.53266112091453,
+      "composition": "stony"
+    },
+    {
+      "site_id": 7,
+      "latitude": 17.18230687000261,
+      "longitude": 82.2044543162201,
+      "composition": "iron"
+    },
+    {
+      "site_id": 8,
+      "latitude": 16.061179966067108,
+      "longitude": 82.05089172198691,
+      "composition": "stony-iron"
+    },
+    {
+      "site_id": 9,
+      "latitude": 16.01840987710877,
+      "longitude": 83.76246771784432,
+      "composition": "stony-iron"
+    },
+    {
+      "site_id": 10,
+      "latitude": 16.433198794261227,
+      "longitude": 82.84423315116544,
+      "composition": "stony"
+    }
+  ]
+}
