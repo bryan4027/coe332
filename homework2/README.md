@@ -15,7 +15,23 @@ This second Python Script reads in the JSON file and assigns it onto a local lis
 
 # Instructions for Program: 
 1. Run `generate_sites.py` to generate the JSON file
-2. Observe the produced JSON file `random_sites.json` to ensure that the file was produced correctly
+2. Observe the produced JSON file `random_sites.json` to ensure that the file was produced correctly. It should look like the following:
+```python:
+{
+  "sites": [
+    {
+      "site_id": 1,
+      "latitude": 16.268728488224802,
+      "longitude": 83.69486747387447,
+      "composition": "stony"
+    },
+    {
+      "site_id": 2,
+      "latitude": 16.510138051478844,
+      "longitude": 82.99087017418388,
+      "composition": "iron"
+    },
+```
 3. Run `calculate_trip.py` to read in the produced JSON file and calculate the trip times
 4. Observe the results - it prints the leg, which is an indicator of how many sites the rover has visited, the time that it took to travel between each leg, how long the rover took to sample the site, the total number of legs for the overall trip and the total time for the entire trip.
 
