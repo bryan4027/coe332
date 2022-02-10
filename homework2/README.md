@@ -9,7 +9,7 @@ This python script's purpose is to create a JSON file that lists the random site
 
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
-<br>
+
 Python
 ```python:
 import json
@@ -47,7 +47,6 @@ This second Python Script reads in the JSON file and assigns it onto a local lis
 
 <details>
 <summary>Show python script 2: calculate_trip.py </summary>
-<br>
 Python:
 ```python:
 import json
