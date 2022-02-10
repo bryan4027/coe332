@@ -10,7 +10,8 @@ This python script's purpose is to create a JSON file that lists the random site
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
 <br>
-```python
+Python
+```python:
 import json
 from random import seed
 import random 
@@ -48,7 +49,7 @@ This second Python Script reads in the JSON file and assigns it onto a local lis
 <summary>Show python script 2: calculate_trip.py </summary>
 <br>
 Python:
-```python
+```python:
 import json
 import math
 def compute_distances(input_sites):
