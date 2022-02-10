@@ -47,8 +47,9 @@ This second Python Script reads in the JSON file and assigns it onto a local lis
 
 <details>
 <summary>Show python script 2: calculate_trip.py </summary>
-Python:
+Python
 ```python:
+
 import json
 import math
 def compute_distances(input_sites):
