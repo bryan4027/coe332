@@ -33,6 +33,21 @@ This second Python Script reads in the JSON file and assigns it onto a local lis
     },
 ```
 3. Run `calculate_trip.py` to read in the produced JSON file and calculate the trip times
+```python:
+leg =  0 , time to travel =  10.028412380420631 , time to sample =  1  hr
+leg =  1 , time to travel =  4.167982942347527 , time to sample =  2  hr
+leg =  2 , time to travel =  1.4068974074119245 , time to sample =  1  hr
+leg =  3 , time to travel =  4.197843984486427 , time to sample =  2  hr
+leg =  4 , time to travel =  8.69800562663968 , time to sample =  1  hr
+leg =  5 , time to travel =  5.879956699140427 , time to sample =  1  hr
+leg =  6 , time to travel =  1.9485545577433083 , time to sample =  2  hr
+leg =  7 , time to travel =  1.2846683925065174 , time to sample =  3  hr
+leg =  8 , time to travel =  10.12537765815768 , time to sample =  3  hr
+leg =  9 , time to travel =  5.4395822045370705 , time to sample =  1  hr
+
+ total legs =  10 , totaltime =  70.17728185339121
+```
+
 4. Observe the results - it prints the leg, which is an indicator of how many sites the rover has visited, the time that it took to travel between each leg, how long the rover took to sample the site, the total number of legs for the overall trip and the total time for the entire trip.
 
 
