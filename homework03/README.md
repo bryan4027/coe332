@@ -1,4 +1,4 @@
-# This folder belongs to Bryan Acosta's homework 2.
+# This folder belongs to Bryan Acosta's homework 3.
 Eid ba25389. TACC id: ba25389.
 
 # Calculating Travel Times of Mars Rover using JSON files
@@ -43,7 +43,11 @@ compute_distances(ml_data['sites'])
 </details>
 
 # Instructions for Program: 
-1. Run `generate_sites.py` to generate the JSON file. enter the following into the command line: 
+1. Download `turbidity_data.json` by running the following into the terminal:
+```python:
+wget https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json
+```
+2.  Run `generate_sites.py` to generate the JSON file. enter the following into the command line: 
 ```python: 
 python3 generate_sites.py
 ``` 
