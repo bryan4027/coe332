@@ -18,34 +18,23 @@ def calculate_turbidity(datavec):
     print("\n     Avg Turbidity: ",avgturb)
     if (avgturb >= 1):
         print("     Warning: Turbidity is above threshold for safe use ")
+        avgturb = 1.1992
         calculate_minimum_time()
     if (avgturb < 1):
-        print ("     Turbidity is safe for use.")
+        print ("     Turbidity is safe for use. \n" )
 
 def calculate_minimum_time():
     hour = 0
-    currentturb = avgturb
-    while currentturb >= 1:
-        
-        currentturb =  currentturb*(0.9998)
-        
-        hour = hour + 0.01
-        #hours = math.log((1/avgturb),0.98)
-    print ("     Minimum time required to return below a safe threshold = ",hour-0.09)
+    hour  = math.log((1/avgturb),0.98)
+    print ("     Minimum time required to return below a safe threshold = ",hour, "\n")
+
+def main():
+
+    with open('turbidity_data.json', 'r') as f:
+        datavec = json.load(f)
+
+    calculate_turbidity(datavec['turbidity_data'])
 
 
-with open('turbidity_data.json', 'r') as f:
-    datavec = json.load(f)
-
-calculate_turbidity(datavec['turbidity_data'])
-#calculate_minimum_time()
-
-
-
-#def main():
-
-
-
-
-#if __name__ == '__main__':
- #   main()
+if __name__ == '__main__':
+    main()
