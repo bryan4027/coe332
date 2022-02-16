@@ -1,10 +1,5 @@
 import json
 import math
-import random
-
-#def calculate_turbidity():
-
-#def caclulate_minimum_time():
 
 def calculate_turbidity(datavec):
     x = -5
@@ -20,16 +15,23 @@ def calculate_turbidity(datavec):
         current = float(lastfivedicts[i]['detector_current'])
         avgturb = avgturb + (calibration_const*current)
     avgturb = avgturb/(len(lastfivedicts))
-    print("Avg Turbidity: ",avgturb)
-    return avgturb
+    print("\n     Avg Turbidity: ",avgturb)
+    
+    if (avgturb >= 1):
+        print("     Warning: Turbidity is above threshold for safe use \n")
+    if (avgturb < 1):
+        print ("     Turbidity is safe for use. \n")
+
+#def caclulate_minimum_time():
+
 
 with open('turbidity_data.json', 'r') as f:
     datavec = json.load(f)
 
 calculate_turbidity(datavec['turbidity_data'])
 
-for i in lastfivedicts:
-    print(i)
+
+
 
 #def main():
 
