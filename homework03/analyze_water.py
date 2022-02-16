@@ -20,7 +20,7 @@ def calculate_turbidity(datavec):
         current = float(lastfivedicts[i]['detector_current'])
         avgturb = avgturb + (calibration_const*current)
     avgturb = avgturb/(len(lastfivedicts))
-    print(avgturb)
+    print("Avg Turbidity: ",avgturb)
     return avgturb
 
 with open('turbidity_data.json', 'r') as f:
