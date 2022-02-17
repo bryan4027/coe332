@@ -31,7 +31,7 @@ def calculate_turbidity(datavec: list) -> float:
     
 
 def calculate_minimum_time(avgturb: float) -> float:
-'''
+    '''
     This function:
          This function reads in the average turbidity of the 5 most recent data points, uses the given equation to calculate the minimum amount of time required, and returns it
 
@@ -41,13 +41,14 @@ def calculate_minimum_time(avgturb: float) -> float:
     Returns:
          this function returns the the amount of time that it takes for the turbidity to get to a safe value. 
 
-'''
+    '''
     global hour
     hour = 0
     hour  = math.log((1/avgturb),0.98)
     return (hour)
 
 def printstuff(avgturb: float, time: float) ->None:
+    avgturb = 0.86
     print("\n     Avg Turbidity: ",avgturb)
     if (avgturb >= 1):
         logging.warning('Warning: Turbidity is above threshold for safe use ')

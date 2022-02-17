@@ -2533,6 +2533,202 @@
       "calibration_constant": 1.04,
       "detector_current": 1.1360000000000001,
       "analyzed_by": "J. Maertz"
+    },
+    {
+      "datetime": "2022-02-16 02:00",
+      "sample_volume": 1.24,
+      "calibration_constant": 1.031,
+      "detector_current": 1.135,
+      "analyzed_by": "F. Zhou"
+    },
+    {
+      "datetime": "2022-02-16 03:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 1.011,
+      "detector_current": 1.102,
+      "analyzed_by": "R. Zhang"
+    },
+    {
+      "datetime": "2022-02-16 04:00",
+      "sample_volume": 1.23,
+      "calibration_constant": 0.976,
+      "detector_current": 1.108,
+      "analyzed_by": "B. Rossi"
+    },
+    {
+      "datetime": "2022-02-16 05:00",
+      "sample_volume": 1.24,
+      "calibration_constant": 1.036,
+      "detector_current": 1.108,
+      "analyzed_by": "B. Rossi"
+    },
+    {
+      "datetime": "2022-02-16 06:00",
+      "sample_volume": 1.2,
+      "calibration_constant": 0.986,
+      "detector_current": 1.151,
+      "analyzed_by": "S. Chaves"
+    },
+    {
+      "datetime": "2022-02-16 07:00",
+      "sample_volume": 1.16,
+      "calibration_constant": 1.048,
+      "detector_current": 1.143,
+      "analyzed_by": "A. Mendoza"
+    },
+    {
+      "datetime": "2022-02-16 08:00",
+      "sample_volume": 1.2,
+      "calibration_constant": 0.974,
+      "detector_current": 1.1880000000000002,
+      "analyzed_by": "C. Kight"
+    },
+    {
+      "datetime": "2022-02-16 09:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 0.986,
+      "detector_current": 1.1540000000000001,
+      "analyzed_by": "A. Mendoza"
+    },
+    {
+      "datetime": "2022-02-16 10:00",
+      "sample_volume": 1.16,
+      "calibration_constant": 1.015,
+      "detector_current": -1.153,
+      "analyzed_by": "E. Oopsdonnell"
+    },
+    {
+      "datetime": "2022-02-16 11:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 0.968,
+      "detector_current": 1.124,
+      "analyzed_by": "S. Chaves"
+    },
+    {
+      "datetime": "2022-02-16 12:00",
+      "sample_volume": 1.17,
+      "calibration_constant": 1.011,
+      "detector_current": 1.159,
+      "analyzed_by": "R. Zhang"
+    },
+    {
+      "datetime": "2022-02-16 13:00",
+      "sample_volume": 1.16,
+      "calibration_constant": 1.027,
+      "detector_current": 1.1600000000000001,
+      "analyzed_by": "A. Mendoza"
+    },
+    {
+      "datetime": "2022-02-16 14:00",
+      "sample_volume": 1.18,
+      "calibration_constant": 1.012,
+      "detector_current": 1.109,
+      "analyzed_by": "C. Milligan"
+    },
+    {
+      "datetime": "2022-02-16 15:00",
+      "sample_volume": 1.18,
+      "calibration_constant": 1.013,
+      "detector_current": 1.1760000000000002,
+      "analyzed_by": "A. Mendoza"
+    },
+    {
+      "datetime": "2022-02-16 16:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 1.009,
+      "detector_current": 1.1260000000000001,
+      "analyzed_by": "K. Judkins"
+    },
+    {
+      "datetime": "2022-02-16 17:00",
+      "sample_volume": 1.2,
+      "calibration_constant": 0.954,
+      "detector_current": 1.183,
+      "analyzed_by": "C. Kight"
+    },
+    {
+      "datetime": "2022-02-16 18:00",
+      "sample_volume": 1.17,
+      "calibration_constant": 1.016,
+      "detector_current": 1.1420000000000001,
+      "analyzed_by": "J. Maertz"
+    },
+    {
+      "datetime": "2022-02-16 19:00",
+      "sample_volume": 1.23,
+      "calibration_constant": 1.048,
+      "detector_current": -1.137,
+      "analyzed_by": "E. Oopsdonnell"
+    },
+    {
+      "datetime": "2022-02-16 20:00",
+      "sample_volume": 1.24,
+      "calibration_constant": 1.016,
+      "detector_current": 1.1580000000000001,
+      "analyzed_by": "C. Milligan"
+    },
+    {
+      "datetime": "2022-02-16 21:00",
+      "sample_volume": 1.17,
+      "calibration_constant": 0.984,
+      "detector_current": 1.1260000000000001,
+      "analyzed_by": "S. Chaves"
+    },
+    {
+      "datetime": "2022-02-16 22:00",
+      "sample_volume": 1.18,
+      "calibration_constant": 0.965,
+      "detector_current": -1.191,
+      "analyzed_by": "E. Oopsdonnell"
+    },
+    {
+      "datetime": "2022-02-16 23:00",
+      "sample_volume": 1.23,
+      "calibration_constant": 0.979,
+      "detector_current": 1.1640000000000001,
+      "analyzed_by": "S. Chaves"
+    },
+    {
+      "datetime": "2022-02-17 00:00",
+      "sample_volume": 1.17,
+      "calibration_constant": 1.007,
+      "detector_current": 1.125,
+      "analyzed_by": "F. Zhou"
+    },
+    {
+      "datetime": "2022-02-17 01:00",
+      "sample_volume": 1.16,
+      "calibration_constant": 1.018,
+      "detector_current": 1.114,
+      "analyzed_by": "F. Zhou"
+    },
+    {
+      "datetime": "2022-02-17 02:00",
+      "sample_volume": 1.23,
+      "calibration_constant": 0.951,
+      "detector_current": 1.175,
+      "analyzed_by": "C. Milligan"
+    },
+    {
+      "datetime": "2022-02-17 03:00",
+      "sample_volume": 1.23,
+      "calibration_constant": 0.972,
+      "detector_current": 1.1360000000000001,
+      "analyzed_by": "B. Rossi"
+    },
+    {
+      "datetime": "2022-02-17 04:00",
+      "sample_volume": 1.23,
+      "calibration_constant": 1.039,
+      "detector_current": 1.145,
+      "analyzed_by": "K. Judkins"
+    },
+    {
+      "datetime": "2022-02-17 05:00",
+      "sample_volume": 1.16,
+      "calibration_constant": 1.049,
+      "detector_current": 1.122,
+      "analyzed_by": "B. Rossi"
     }
   ]
 }
