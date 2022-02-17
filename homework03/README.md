@@ -160,14 +160,17 @@ wget https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.jso
 python3 analyze_water.py
 ``` 
 4. Observe Output. When the water is safe the output will look like this:
-    
+```python:
+     Avg Turbidity:  0.86
+INFO:root:Turbidity is safe for use.
+```
 and when the water is not safe, the output will look like this:
 ```python:
-         Avg Turbidity:  1.1444604
+ Avg Turbidity:  1.1444604
 WARNING:root:Warning: Turbidity is above threshold for safe use
      Minimum time required to return below a safe threshold =  6.678969181162484
-
-3. Run `calculate_trip.py` to read in the produced JSON file and calculate the trip times. enter the following into the command line:
+```
+5. Run `calculate_trip.py` to read in the produced JSON file and calculate the trip times. enter the following into the command line:
 ```python:
 python3 calculate_trip.py
 ```
