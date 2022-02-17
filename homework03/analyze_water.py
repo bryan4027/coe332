@@ -21,7 +21,7 @@ def calculate_minimum_time(avgturb: float) -> float:
     global hour
     hour = 0
     hour  = math.log((1/avgturb),0.98)
-    return hour
+    return (hour)
 
 def printstuff(avgturb: float, time: float) ->None:
     print("\n     Avg Turbidity: ",avgturb)
