@@ -227,6 +227,63 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
     } ] }    
 ```
 </details>
+and the second JSON file:
+<details>
+<summary>Show python script 1: generate_sites.py</summary>
+```python:
+{
+  "turbidity_data": [
+    {
+      "datetime": "2022-02-01 00:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "C. Milligan"
+    },
+    {
+      "datetime": "2022-02-01 01:00",
+      "sample_volume": 1.15,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "C. Milligan"
+    },
+    {
+      "datetime": "2022-02-01 02:00",
+      "sample_volume": 1.15,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "C. Milligan"
+    },
+    {
+      "datetime": "2022-02-01 03:00",
+      "sample_volume": 1.18,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "R. Zhang"
+    },
+    {
+      "datetime": "2022-02-01 04:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "J. Maertz"
+    },
+    {
+      "datetime": "2022-02-01 05:00",
+      "sample_volume": 1.17,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "K. Judkins"
+    },
+    {
+      "datetime": "2022-02-01 06:00",
+      "sample_volume": 1.24,
+      "calibration_constant": 1.0,
+      "detector_current": 1.4632,
+      "analyzed_by": "F. Zhou"
+    } ] }  
+```
+</details>
     
 6. Run `test_analyze_water.py` to test the `analyze_water.py` correctness. enter the following into the command line:
 ```python:
