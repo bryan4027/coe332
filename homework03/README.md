@@ -175,7 +175,7 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
 JSON
-```Json:
+```python:
 {
   "turbidity_data": [
     {
@@ -234,8 +234,9 @@ and the second JSON file:
     
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
+    
 JSON
-```Json:
+```python:
 {
   "turbidity_data": [
     {
