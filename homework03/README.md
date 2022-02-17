@@ -235,7 +235,7 @@ and the second JSON file:
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
 JSON
-```pJson:
+```Json:
 {
   "turbidity_data": [
     {
