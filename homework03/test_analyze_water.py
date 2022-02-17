@@ -29,11 +29,11 @@ def test_calculate_minimum_time():
     assert isinstance(calculate_minimum_time(1.4244), float) == True
     assert isinstance(calculate_minimum_time(1.4244), str) == False
 
-def main():
+def pytest():
 
     test_calculate_turbidity()
     test_calculate_minimum_time()
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__pytest__':
+    pytest()
