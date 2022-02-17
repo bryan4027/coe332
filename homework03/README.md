@@ -9,7 +9,6 @@ This python script's purpose is to read in a JSON file and calculate the average
 
 <details>
 <summary>Show python script 1: analyze_water.py</summary>
-
 Python
 
 ```python:
@@ -175,7 +174,7 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
 <details>
 <summary>Show python script 2: test_analyze_water.py </summary>
 Json
-```Json:
+```python:
 {
   "turbidity_data": [
     {
@@ -232,7 +231,7 @@ And the second file:
  <details>
 <summary>Show json file #2 : datatest2.json</summary>
 Json
-```Json:
+```python:
 {
   "turbidity_data": [
     {
