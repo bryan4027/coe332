@@ -171,8 +171,10 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
 ```
     
 5. In order to run the next script, you will need to ensure that you have these next two JSON files within the directory. They are filled with DATA where it is easy to calculate the results and thus figure out if the function is working correctly. If you do not have either of them in the directory, please creat files named `datatest.json`and `datatest2.json`. Then copy paste the content accordingly.
+    
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
+JSON
 ```python:
 {
   "turbidity_data": [
@@ -232,6 +234,7 @@ and the second JSON file:
     
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
+JSON
 ```python:
 {
   "turbidity_data": [
