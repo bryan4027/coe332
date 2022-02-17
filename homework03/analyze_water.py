@@ -1,7 +1,7 @@
 import json
 import math
 
-def calculate_turbidity(datavec):
+def calculate_turbidity(datavec: list) -> float:
     x = -5
     global lastfivedicts
     lastfivedicts = []
