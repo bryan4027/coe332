@@ -1,11 +1,11 @@
 # This folder belongs to Bryan Acosta's homework 3.
 Eid ba25389. TACC id: ba25389.
 
-# Calculating Travel Times of Mars Rover using JSON files
-The purpose of this project is to generate a listing of target sites for a Mars Rover's journey. This assignment helps practice newly learned python and JSON skills. JSON files are important because it is the most universal data type that can be read by muliple programming languages - making it ideal for big programs.
+# Analyzing Mar's Rover's Collected Data
+The purpose of this project is to read in a JSON file of the collected data, analyze it, and determine if the water is safe for sample testing. It determines this based off the 5 most recent data points. This project enhances my skills with JSON manipulation, huge list manipulation, Python organization, documentation, logging, unit testing, and more.
 
 # Part 1 Python Script:
-This python script's purpose is to create a JSON file that lists the random sites. It uses the random function to generate random numbers to assign numbers from 16-18 for the latitude and numbers from 82-84 for the longitude. It also creates a list of compositions and randomly chooses one from the list. It adds each site onto a list one by one, and then in the end it dumps that list into a JSON file.
+This python script's purpose is to read in a JSON file and calculate the average turbidity of the 5 most recent data points. 
 
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
