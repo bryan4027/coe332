@@ -173,9 +173,9 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
     
 5. In order to run the next script, you will need to ensure that you have these next two JSON files within the directory. They are filled with DATA where it is easy to calculate the results and thus figure out if the function is working correctly. If you do not have either of them in the directory, please creat files named `datatest.json`and `datatest2.json`. Then copy paste the content accordingly.
 <details>
-    <summary>Show python script 2: test_analyze_water.py </summary>
+<summary>Show python script 2: test_analyze_water.py </summary>
 Json
-```json
+```Json
 {
   "turbidity_data": [
     {
@@ -284,8 +284,7 @@ Json
       "detector_current": 1.1992,
       "analyzed_by": "F. Zhou"
     } ] }
-```
-    
+```    
 6. Run `test_analyze_water.py` to test the `analyze_water.py` correctness. enter the following into the command line:
 ```python:
 python3 test_analyze_water.py
