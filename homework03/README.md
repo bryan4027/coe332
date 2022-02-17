@@ -136,27 +136,30 @@ if __name__ == '__pytest__':
 ```python:
 wget https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json
 ```
-2.  Run `analyze_water.py` to generate the JSON file. enter the following into the command line: 
-```python: 
-python3 generate_sites.py
-``` 
-2. Observe the produced JSON file `random_sites.json` to ensure that the file was produced correctly. It should look like the following:
+2. Observe the produced JSON file `turbidity_data.json` to ensure that the file was produced correctly. It should look like the following:
 ```python:
 {
-  "sites": [
+  "turbidity_data": [
     {
-      "site_id": 1,
-      "latitude": 16.268728488224802,
-      "longitude": 83.69486747387447,
-      "composition": "stony"
+      "datetime": "2022-02-01 00:00",
+      "sample_volume": 1.19,
+      "calibration_constant": 1.022,
+      "detector_current": 1.137,
+      "analyzed_by": "C. Milligan"
     },
     {
-      "site_id": 2,
-      "latitude": 16.510138051478844,
-      "longitude": 82.99087017418388,
-      "composition": "iron"
+      "datetime": "2022-02-01 01:00",
+      "sample_volume": 1.15,
+      "calibration_constant": 0.975,
+      "detector_current": 1.141,
+      "analyzed_by": "C. Milligan"
     },
 ```
+3.  Run `analyze_water.py` to read in the JSON file and analyze it. enter the following into the command line: 
+```python: 
+python3 analyze_water.py
+``` 
+
 3. Run `calculate_trip.py` to read in the produced JSON file and calculate the trip times. enter the following into the command line:
 ```python:
 python3 calculate_trip.py
