@@ -170,24 +170,9 @@ and when the water is not safe, the output will look like this:
 WARNING:root:Warning: Turbidity is above threshold for safe use
      Minimum time required to return below a safe threshold =  6.678969181162484
 ```
-5. Run `calculate_trip.py` to read in the produced JSON file and calculate the trip times. enter the following into the command line:
+5. Run `test_analyze_water.py` to test the `analyze_water.py` correctness. enter the following into the command line:
 ```python:
-python3 calculate_trip.py
+python3 test_analyze_water.py
 ```
 
-4. Observe the results - it prints the leg, which is an indicator of how many sites the rover has visited, the time that it took to travel between each leg, how long the rover took to sample the site, the total number of legs for the overall trip and the total time for the entire trip.
-
-```python:
-leg =  0 , time to travel =  10.028412380420631 , time to sample =  1  hr
-leg =  1 , time to travel =  4.167982942347527 , time to sample =  2  hr
-leg =  2 , time to travel =  1.4068974074119245 , time to sample =  1  hr
-leg =  3 , time to travel =  4.197843984486427 , time to sample =  2  hr
-leg =  4 , time to travel =  8.69800562663968 , time to sample =  1  hr
-leg =  5 , time to travel =  5.879956699140427 , time to sample =  1  hr
-leg =  6 , time to travel =  1.9485545577433083 , time to sample =  2  hr
-leg =  7 , time to travel =  1.2846683925065174 , time to sample =  3  hr
-leg =  8 , time to travel =  10.12537765815768 , time to sample =  3  hr
-leg =  9 , time to travel =  5.4395822045370705 , time to sample =  1  hr
-
- total legs =  10 , totaltime =  70.17728185339121
-```
+6. Observe the results - if it runs and does not display anything, then the code is correct. Otherwise, there is an error somewhere in your code, whether in function, inputs, variables, or more, depending on the output text.
