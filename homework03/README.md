@@ -227,7 +227,9 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
     } ] }    
 ```
 </details>
+    
 and the second JSON file:
+    
 <details>
 <summary>Show python script 1: generate_sites.py</summary>
 ```python:
