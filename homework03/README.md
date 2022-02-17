@@ -171,9 +171,6 @@ WARNING:root:Warning: Turbidity is above threshold for safe use
 ```
     
 5. In order to run the next script, you will need to ensure that you have these next two JSON files within the directory. They are filled with DATA where it is easy to calculate the results and thus figure out if the function is working correctly. If you do not have either of them in the directory, please creat files named `datatest.json`and `datatest2.json`. Then copy paste the content accordingly.
-<details>
-<summary>Show python script 2: test_analyze_water.py </summary>
-Json
 ```python:
 {
   "turbidity_data": [
@@ -225,65 +222,8 @@ Json
       "calibration_constant": 1.0,
       "detector_current": 1.1992,
       "analyzed_by": "F. Zhou"
-    } ] }
+    } ] }    
 ```
-And the second file:
- <details>
-<summary>Show json file #2 : datatest2.json</summary>
-Json
-```python:
-{
-  "turbidity_data": [
-    {
-      "datetime": "2022-02-01 00:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 01:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 02:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 03:00",
-      "sample_volume": 1.18,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "R. Zhang"
-    },
-    {
-      "datetime": "2022-02-01 04:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "J. Maertz"
-    },
-    {
-      "datetime": "2022-02-01 05:00",
-      "sample_volume": 1.17,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "K. Judkins"
-    },
-    {
-      "datetime": "2022-02-01 06:00",
-      "sample_volume": 1.24,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "F. Zhou"
-    } ] }
-```    
 6. Run `test_analyze_water.py` to test the `analyze_water.py` correctness. enter the following into the command line:
 ```python:
 python3 test_analyze_water.py
