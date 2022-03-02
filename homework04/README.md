@@ -56,13 +56,41 @@ Status: Downloaded newer image for bryan4027/ml_data_analysis:hw04
 docker.io/bryan4027/ml_data_analysis:hw04
 
 ```
-4.  
+4.  Next, start the interactive shell by running the following!
 ```python
-pip3 install pytest==7.0.0
+docker run --rm -it bryan4027/ml_data_analysis:hw04 /bin/bash
 ```
-5.  
+5.  Run the following two commands and the outputs should look like the following terminal output!
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+[root@4e82e3d84ad6 /]# whoami
+root
+[root@4e82e3d84ad6 /]# pwd
+/
+```
+6.  move into the file with the code! run the following
+```python
+cd code
+```
+7.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
+```python
+python3 ml_data_analysis.py Meteorite_Landings.json
+```
+Your output should look like this: 
+```python
+Summary data following meteorite analysis:
+
+Average mass of 30 meteor(s): 83857.3
+
+Hemisphere summary data:
+There were 6  meteors found in the  Northern & Western Quadrant.
+There were 21  meteors found in the  Northern & Eastern Quadrant.
+There were 3  meteors found in the  Southern & Western Quadrant.
+There were 0  meteors found in the  Eastern & Western Quadrant.
+
+Class summary data:
+The   L5  class was found  1 times.
+The   H6  class was found  1 times.
+... etc!
 ```
 
 ## Build an image from your Dockerfile <a name="paragraph1"></a>
