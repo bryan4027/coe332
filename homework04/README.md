@@ -20,7 +20,8 @@ if __name__ == '__pytest__':
 
 # Instructions: 
 
-1. ```python: docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash```
+1. 
+```docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash```
 2. `
 3. `
 4. `
@@ -35,3 +36,4 @@ if __name__ == '__pytest__':
 13. `
 14. `
 15. `
+16. `
