@@ -407,7 +407,7 @@ cd code
 ```
 8.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal. replace the <your_json_file_name> with your file name.
 ```python
-python3 ml_data_analysis.py <your_json_file_name>.json
+python3 ml_data_analysis.py ML_Data_Sample.json
 ```
 Your output should be in this format (with different data if you try another file!) 
 ```python
