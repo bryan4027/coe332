@@ -116,17 +116,64 @@ docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
 ```
 
 ## Run the containerized code against the sample data inside the container <a name="subparagraph1"></a>
-1. 
+1. Make sure you have all the files in this repository.
+2. Paste the following into the terminal. Replace the <dockerusername> with your username and <version_tag_you_want_to_use> with the tag of your choosing. Example of mine below
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+docker build -t <dockerusername>/ml_data_analysis:<version_tag_you_want_to_use> .
 ```
-2. 
-```python
-yum update
+Example using my Docker account and tag:
 ```
-3.  
+docker build -t bryan4027/ml_data_analysis:hw04 .
+```
+Your output will look like the following.
+<details>
+<summary>Click to show output</summary>
+   
+```python:
+[ba25389@isp02 homework04]$ docker build -t bryan4027/ml_data_analysis:hw04 .
+Sending build context to Docker daemon  46.08kB
+Step 1/10 : FROM centos:7.9.2009
+ ---> eeb6ee3f44bd
+Step 2/10 : RUN yum update -y && yum install -y python3
+ ---> Using cache
+ ---> d605a0dae43f
+Step 3/10 : RUN pip3 install pytest==7.0.0
+ ---> Using cache
+ ---> f4be093b12b2
+Step 4/10 : COPY ml_data_analysis.py /code/ml_data_analysis.py
+ ---> 885dd5362f28
+Step 5/10 : COPY test_ml_data_analysis.py /code/test_ml_data_analysis.py
+ ---> de44571f21d6
+Step 6/10 : COPY Meteorite_Landings.json /code/Meteorite_Landings.json
+ ---> 4229dd8dcb17
+Step 7/10 : RUN chmod +rx /code/ml_data_analysis.py
+ ---> Running in 4c4a8c38ee6a
+Removing intermediate container 4c4a8c38ee6a
+ ---> 8d55974bcf8a
+Step 8/10 : RUN chmod +rx /code/test_ml_data_analysis.py
+ ---> Running in c5e61f6d3d13
+Removing intermediate container c5e61f6d3d13
+ ---> 527ac6d58870
+Step 9/10 : RUN chmod +rx /code/Meteorite_Landings.json
+ ---> Running in b9b428f9a528
+Removing intermediate container b9b428f9a528
+ ---> fbaea8c9cd79
+Step 10/10 : ENV PATH "/code:$PATH"
+ ---> Running in 3fafa5399088
+Removing intermediate container 3fafa5399088
+ ---> f85ba3ea8785
+Successfully built f85ba3ea8785
+Successfully tagged bryan4027/ml_data_analysis:hw04
+```
+</details>
+
+3.  Paste the following into the terminal. Replace the <dockerusername> with your username and <version_tag_you_want_to_use> with the tag of your choosing. Example of mine below
 ```python
-yum install python3
+docker run --rm -it <dockerusername>/ml_data_analysis:<version_tag_you_want_to_use> /bin/bash
+```
+Example using my Docker account and tag:
+```
+docker run --rm -it bryan4027/ml_data_analysis:hw04 /bin/bash
 ```
 4.  
 ```python
