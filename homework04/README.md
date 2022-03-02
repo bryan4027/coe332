@@ -32,17 +32,29 @@ if __name__ == '__pytest__':
 5. [Run the containerized test suite with pytest](#paragraph3)
 
 ## Pull and use your existing image on Docker Hub  <a name="introduction"></a>
-1. 
+1. Go to my Dockerhub profile
+https://hub.docker.com/repository/docker/bryan4027/ml_data_analysis
+
+2. If you click on tags, you will see the latest version plus the older versions. The latest version is the option on the top. If you navigate to the right side of the screen, you will see a box with a copyable link which is the following
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+docker pull bryan4027/ml_data_analysis:hw04
 ```
-2. 
-```python
-yum update
-```
-3.  
-```python
-yum install python3
+3. Paste the previous command into the terminal. When complete, the output will look like following:
+```terminal
+PS C:\Users\bacos> docker pull bryan4027/ml_data_analysis:hw04
+hw04: Pulling from bryan4027/ml_data_analysis
+2d473b07cdd5: Pull complete
+5da5a235d053: Pull complete
+34b124c5e311: Pull complete
+262ce0fe5dcb: Pull complete
+68e4890295e5: Pull complete
+4095f3e4b287: Pull complete
+cef545f9340f: Pull complete
+e5defc447125: Pull complete
+Digest: sha256:93c81c90384f3bbc41cf93b5ca031ad0eeeee287deaf988a5b78e77acf492416
+Status: Downloaded newer image for bryan4027/ml_data_analysis:hw04
+docker.io/bryan4027/ml_data_analysis:hw04
+
 ```
 4.  
 ```python
@@ -143,95 +155,6 @@ docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
 
 
 
-
-1. 
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-2. 
-```python
-yum update
-```
-3.  
-```python
-yum install python3
-```
-4.  
-```python
-pip3 install pytest==7.0.0
-```
-5.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-
-# Run the containerized code against the sample data inside the container
-1. 
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-2. 
-```python
-yum update
-```
-3.  
-```python
-yum install python3
-```
-4.  
-```python
-pip3 install pytest==7.0.0
-```
-5.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-
-# Run the containerized code against user-provided data that they may have found on the web
-1. 
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-2. 
-```python
-yum update
-```
-3.  
-```python
-yum install python3
-```
-4.  
-```python
-pip3 install pytest==7.0.0
-```
-5.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-
-# Run the containerized test suite with pytest
-
-1. 
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-2. 
-```python
-yum update
-```
-3.  
-```python
-yum install python3
-```
-4.  
-```python
-pip3 install pytest==7.0.0
-```
-5.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-6.  
 ```python
 FROM centos:7.9.2009
 
