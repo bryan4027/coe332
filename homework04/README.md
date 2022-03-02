@@ -26,15 +26,15 @@ docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
 ```
 2. 
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+yum update
 ```
 3.  
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+yum install python3
 ```
 4.  
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+pip3 install pytest==7.0.0
 ```
 5.  
 ```python
@@ -42,15 +42,28 @@ docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
 ```
 6.  
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+FROM centos:7.9.2009
+
+RUN yum update -y && yum install -y python3
+RUN pip3 install pytest==7.0.0
+
+COPY ml_data_analysis.py /code/ml_data_analysis.py
+COPY test_ml_data_analysis.py /code/test_ml_data_analysis.py
+COPY Meteorite_Landings.json /code/Meteorite_Landings.json
+
+RUN chmod +rx /code/ml_data_analysis.py
+RUN chmod +rx /code/test_ml_data_analysis.py
+RUN chmod +rx /code/Meteorite_Landings.json
+
+ENV PATH "/code:$PATH"
 ```
 7.  
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+docker build -t <dockerhubusername>/<code>:<version> .
 ```
 8.  
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+docker build -t bryan4027/ml_data_analysis:1.0 .
 ```
 9.  
 ```python
