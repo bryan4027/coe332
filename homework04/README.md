@@ -19,6 +19,106 @@ if __name__ == '__pytest__':
 
 
 # Instructions: 
+Instructions given for following options to perform this program. 
+
+- Pull and use your existing image on Docker Hub   
+- Build an image from your Dockerfile
+- Run the containerized code against the sample data inside the container
+- Run the containerized code against user-provided data that they may have found on the web
+- Run the containerized test suite with pytest
+
+# Pull and use your existing image on Docker Hub
+
+1. 
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+2. 
+```python
+yum update
+```
+3.  
+```python
+yum install python3
+```
+4.  
+```python
+pip3 install pytest==7.0.0
+```
+5.  
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+
+
+# Build an image from your Dockerfile
+
+1. 
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+2. 
+```python
+yum update
+```
+3.  
+```python
+yum install python3
+```
+4.  
+```python
+pip3 install pytest==7.0.0
+```
+5.  
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+
+# Run the containerized code against the sample data inside the container
+1. 
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+2. 
+```python
+yum update
+```
+3.  
+```python
+yum install python3
+```
+4.  
+```python
+pip3 install pytest==7.0.0
+```
+5.  
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+
+# Run the containerized code against user-provided data that they may have found on the web
+1. 
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+2. 
+```python
+yum update
+```
+3.  
+```python
+yum install python3
+```
+4.  
+```python
+pip3 install pytest==7.0.0
+```
+5.  
+```python
+docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+```
+
+# Run the containerized test suite with pytest
 
 1. 
 ```python
@@ -65,23 +165,4 @@ docker build -t <dockerhubusername>/<code>:<version> .
 ```python
 docker build -t bryan4027/ml_data_analysis:1.0 .
 ```
-9.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-10.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-11.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-12.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-13. `
-14. `
-15. `
-16. `
+
