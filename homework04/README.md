@@ -23,11 +23,48 @@ if __name__ == '__pytest__':
 </details>
 
 # test_ml_data_analysis.py
+This second Python Script is used to test the correctness of the ml_data_analysis.py file. It uses unit testing to individually test if the functions input and output are correct, if the variables are correct types and amounts, and more using Pytest.
 <details>
-<summary>Show python script 2: test_analyze_water.py </summary>
+<summary>Show python script test_ml_data_analysis.py </summary>
 Python
 
 ```python:
+import pytest
+import json
+from ml_data_analysis import *
+
+def test_count_classes():
+    with open('Meteorite_Landings.json', 'r') as f:
+        ml_data = json.load(f)
+    assert isinstance(count_classes(ml_data['meteorite_landings'], 'recclass'), dict) == True
+    assert isinstance(count_classes(ml_data['meteorite_landings'], 'recclass'), int) == False
+    assert isinstance(count_classes(ml_data['meteorite_landings'], 'recclass'), int) != True
+    assert isinstance(count_classes(ml_data['meteorite_landings'], 'recclass'), dict) != False
+    assert isinstance(count_classes(ml_data['meteorite_landings'], 'recclass'), str) == False
+
+
+def test_compute_average_mass():
+    with open('Meteorite_Landings.json', 'r') as f:
+        ml_data = json.load(f)
+    assert(compute_average_mass(ml_data['meteorite_landings'],'mass (g)') > 0)
+    assert(compute_average_mass(ml_data['meteorite_landings'],'mass (g)') != 0)
+    assert isinstance(compute_average_mass(ml_data['meteorite_landings'],'mass (g)'), float) == True
+    assert isinstance(compute_average_mass(ml_data['meteorite_landings'],'mass (g)'), list) != True
+    assert isinstance(compute_average_mass(ml_data['meteorite_landings'],'mass (g)'), list) == False
+
+def test_check_hemisphere():
+    assert isinstance(check_hemisphere(1,1), str) == True
+    assert isinstance(check_hemisphere(1,1), float) == False
+    assert ((check_hemisphere(1,1)) == 'Northern & Eastern')
+    assert ((check_hemisphere(-1,1)) == 'Southern & Eastern')
+    assert ((check_hemisphere(1,-1)) == 'Northern & Western')
+
+
+
+def pytest():
+    test_count_classes()
+    test_compute_average_mass()
+    test_check_hemisphere()
 
 
 if __name__ == '__pytest__':
@@ -339,7 +376,7 @@ A JSON formatted file is essentially a list of dictionaries. It is formatted lik
 </details>
 
 # Dockerfile
-The Dockerfile is a set of instructions given to the computer to create the correct doctor image. Each command in the Dockerfile contributes to the neccessary developer environment needed. 
+The Dockerfile is a set of instructions given to the computer to create the correct doctor image. The Dockerfile is similar to a Makefile in the sense that is stores a set of instructions. Each command in the Dockerfile contributes to the neccessary developer environment needed. 
 
 <details>
 <summary>Show DockerFile </summary>
