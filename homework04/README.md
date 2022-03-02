@@ -225,7 +225,7 @@ The   H6  class was found  1 times.
     
 ## Run the containerized code against user-provided data that they may have found on the web <a name="paragraph2"></a>
     
-You may start off this process with either processes 1 or 2, but you MUST STOP before running the `command`. For the sake of an example, I will follow process 1. If you choose to follow step 2 and creat your own Image, skip to step BLANK of this process    
+You may start off this process with either processes 1 or 2, but you MUST STOP before running the `docker run --rm -it bryan4027/ml_data_analysis:hw04 /bin/bash`. For the sake of an example, I will follow process 1. If you choose to follow step 2 and creat your own Image, skip to step 4 of this process.    
  
 1. Go to my Dockerhub profile
 https://hub.docker.com/repository/docker/bryan4027/ml_data_analysis
@@ -296,57 +296,35 @@ The   L5  class was found  1 times.
 The   H6  class was found  1 times.
 ... etc!
 ```
-    
-
-    
-    
+   
 
 ## Run the containerized test suite with pytest <a name="paragraph3"></a>
-1. 
+    
+1. First you must complete either steps 1 or 2, but at least one. Ensure you are logged into the interactive shell successfully opened by testing pwd and whoami commands and getting following output:
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+[root@1ca2af4a9392 /]# pwd
+/
+[root@1ca2af4a9392 /]# whoami
+root
 ```
-2. 
+2.  move into the file with the code! run the following
 ```python
-yum update
+cd code
 ```
-3.  
+3.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
 ```python
-yum install python3
+pytest
 ```
-4.  
+Your output should look like this: 
 ```python
-pip3 install pytest==7.0.0
-```
-5.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
+[root@1ca2af4a9392 code]# pytest
+============================ test session starts ============================
+platform linux -- Python 3.6.8, pytest-7.0.0, pluggy-1.0.0
+rootdir: /code
+collected 3 items
 
+test_ml_data_analysis.py ...                                          [100%]
 
-
-```python
-FROM centos:7.9.2009
-
-RUN yum update -y && yum install -y python3
-RUN pip3 install pytest==7.0.0
-
-COPY ml_data_analysis.py /code/ml_data_analysis.py
-COPY test_ml_data_analysis.py /code/test_ml_data_analysis.py
-COPY Meteorite_Landings.json /code/Meteorite_Landings.json
-
-RUN chmod +rx /code/ml_data_analysis.py
-RUN chmod +rx /code/test_ml_data_analysis.py
-RUN chmod +rx /code/Meteorite_Landings.json
-
-ENV PATH "/code:$PATH"
-```
-7.  
-```python
-docker build -t <dockerhubusername>/<code>:<version> .
-```
-8.  
-```python
-docker build -t bryan4027/ml_data_analysis:1.0 .
+============================= 3 passed in 0.04s =============================
 ```
 
