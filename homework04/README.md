@@ -6,8 +6,9 @@ Eid ba25389. TACC id: ba25389.
 
 
 
-# Analyzing Mar's Rover's Collected Data
-The purpose of this project is to read in a JSON file of the collected data, analyze it, and determine if the water is safe for sample testing. It determines this based off the 5 most recent data points. This project enhances my skills with JSON manipulation, huge list manipulation, Python organization, documentation, logging, unit testing, and more.
+# Analyzing Meteorite Landings, Mass, and Composition using Docker
+The purpose of this project is to create a script that reads in a JSON file listing Meteorite Landings and analyzes its mass, composition, numbers, and location. We then use `PYTEST`to run a test file that ensures the first script is working correctly. We then use a Dockerfile to create a Docker Container which serves as a developer enviornment ready for anybody to successfully run my program. This README gives explanations on everything we use as well as instructions to successfully run this program.
+
 
 <details>
 <summary>Show python script 2: test_analyze_water.py </summary>
