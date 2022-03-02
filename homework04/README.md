@@ -30,6 +30,7 @@ if __name__ == '__pytest__':
 3. [Run the containerized code against the sample data inside the container](#subparagraph1)
 4. [Run the containerized code against user-provided data that they may have found on the web](#paragraph2)
 5. [Run the containerized test suite with pytest](#paragraph3)
+6. [What input should look like](#paragraph4)
 
 ## Pull and use your existing image on Docker Hub  <a name="introduction"></a>
 1. Go to my Dockerhub profile
@@ -328,3 +329,103 @@ test_ml_data_analysis.py ...                                          [100%]
 ============================= 3 passed in 0.04s =============================
 ```
 
+## What input should look like <a name="paragraph4"></a>    
+
+The input data should be in JSON format. JSON is is a lightweight data-interchange format. It is easy for humans to read and write. It is easy for machines to parse and generate.
+    
+A JSON formatted file is essentially a list of dictionaries. It is formatted like the following: 
+
+```python
+   {
+  "dictionary name": [
+    {
+      "key": "value",
+      "key2": "value",
+      "key3": "value",
+    },
+    {
+      "key": "value",
+      "key2": "value",
+      "key3": "value",
+    }, 
+    ... etc
+    
+```
+    
+The following is an example of running our program with a sample JSON file from the web! The sample file is at https://raw.githubusercontent.com/wjallen/coe332-sample-data/main/ML_Data_Sample.json. Do not download the file yet.
+    
+    
+You may start off this process with either processes 1 or 2, but you MUST STOP before running the `docker run --rm -it bryan4027/ml_data_analysis:hw04 /bin/bash`. For the sake of an example, I will follow process 1. If you choose to follow step 2 and creat your own Image, skip to step 4 of this process.    
+ 
+1. Go to my Dockerhub profile
+https://hub.docker.com/repository/docker/bryan4027/ml_data_analysis
+
+2. If you click on tags, you will see the latest version plus the older versions. The latest version is the option on the top. If you navigate to the right side of the screen, you will see a box with a copyable link which is the following
+```python
+docker pull bryan4027/ml_data_analysis:hw04
+```
+3. Paste the previous command into the terminal. When complete, the output will look like following:
+```terminal
+PS C:\Users\bacos> docker pull bryan4027/ml_data_analysis:hw04
+hw04: Pulling from bryan4027/ml_data_analysis
+2d473b07cdd5: Pull complete
+5da5a235d053: Pull complete
+34b124c5e311: Pull complete
+262ce0fe5dcb: Pull complete
+68e4890295e5: Pull complete
+4095f3e4b287: Pull complete
+cef545f9340f: Pull complete
+e5defc447125: Pull complete
+Digest: sha256:93c81c90384f3bbc41cf93b5ca031ad0eeeee287deaf988a5b78e77acf492416
+Status: Downloaded newer image for bryan4027/ml_data_analysis:hw04
+docker.io/bryan4027/ml_data_analysis:hw04
+
+```
+4.  Within the same folder where you have the rest of the neccesary files, paste the following command to download the file you want to test. For this example we are using sample data.
+```python
+wget https://raw.githubusercontent.com/wjallen/coe332-sample-data/main/ML_Data_Sample.json
+```  
+    
+5. Next, start the interactive shell by running the following! This command creates the image and loads all files in the current folder onto the container.
+```python
+docker run --rm -it -v $PWD:/data <username>/ml_data_analysis:<your_tag> /bin/bash
+```
+replace the <username> and <your_tag> with their respective names. Mine looks like this. 
+```python
+docker run --rm -it -v $PWD:/data bryan4027/ml_data_analysis:hw04 /bin/bash
+```    
+6.  Check the interactive shell successfully opened by running the following two commands and the outputs should look like the following terminal output!
+```python
+[root@4e82e3d84ad6 /]# whoami
+root
+[root@4e82e3d84ad6 /]# pwd
+/
+```
+7.  move into the file with the code! run the following
+```python
+cd code
+```
+8.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal. replace the <your_json_file_name> with your file name.
+```python
+python3 ml_data_analysis.py <your_json_file_name>.json
+```
+Your output should be in this format (with different data if you try another file!) 
+```python
+Summary data following meteorite analysis:
+
+Average mass of 30 meteor(s): 5081.37
+
+Hemisphere summary data:
+There were 86  meteors found in the  Northern & Western Quadrant.
+There were 71  meteors found in the  Northern & Eastern Quadrant.
+There were 69  meteors found in the  Southern & Western Quadrant.
+There were 74  meteors found in the  Eastern & Western Quadrant.
+
+Class summary data:
+The   H4  class was found  22 times.
+The   L6  class was found  18 times.
+
+... etc!
+```
+    
+    
