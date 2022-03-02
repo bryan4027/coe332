@@ -271,15 +271,15 @@ root
 [root@4e82e3d84ad6 /]# pwd
 /
 ```
-6.  move into the file with the code! run the following
+7.  move into the file with the code! run the following
 ```python
 cd code
 ```
-7.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
+8.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal. replace the <your_json_file_name> with your file name.
 ```python
-python3 ml_data_analysis.py Meteorite_Landings.json
+python3 ml_data_analysis.py <your_json_file_name>.json
 ```
-Your output should look like this: 
+Your output should be in this format with different data: 
 ```python
 Summary data following meteorite analysis:
 
@@ -297,38 +297,7 @@ The   H6  class was found  1 times.
 ... etc!
 ```
     
-1. First you must complete either steps 1 or 2, but at least one. Ensure you are logged into the interactive shell successfully opened by testing pwd and whoami commands and getting following output:
-```python
-[root@1ca2af4a9392 /]# pwd
-/
-[root@1ca2af4a9392 /]# whoami
-root
-```
-2.  move into the file with the code! run the following
-```python
-cd code
-```
-3.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
-```python
-python3 ml_data_analysis.py Meteorite_Landings.json
-```
-Your output should look like this: 
-```python
-Summary data following meteorite analysis:
 
-Average mass of 30 meteor(s): 83857.3
-
-Hemisphere summary data:
-There were 6  meteors found in the  Northern & Western Quadrant.
-There were 21  meteors found in the  Northern & Eastern Quadrant.
-There were 3  meteors found in the  Southern & Western Quadrant.
-There were 0  meteors found in the  Eastern & Western Quadrant.
-
-Class summary data:
-The   L5  class was found  1 times.
-The   H6  class was found  1 times.
-... etc!
-```
     
     
 
