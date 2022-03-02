@@ -94,28 +94,7 @@ The   H6  class was found  1 times.
 ```
 
 ## Build an image from your Dockerfile <a name="paragraph1"></a>
-1. 
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
-2. 
-```python
-yum update
-```
-3.  
-```python
-yum install python3
-```
-4.  
-```python
-pip3 install pytest==7.0.0
-```
-5.  
-```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
-```
 
-## Run the containerized code against the sample data inside the container <a name="subparagraph1"></a>
 1. Make sure you have all the files in this repository.
 2. Paste the following into the terminal. Replace the <dockerusername> with your username and <version_tag_you_want_to_use> with the tag of your choosing. Example of mine below
 ```python
@@ -175,36 +154,183 @@ Example using my Docker account and tag:
 ```
 docker run --rm -it bryan4027/ml_data_analysis:hw04 /bin/bash
 ```
-4.  
+4.  Ensure the shell successfully opened by testing pwd and whoami commands and getting following output:
 ```python
-pip3 install pytest==7.0.0
+[root@1ca2af4a9392 /]# pwd
+/
+[root@1ca2af4a9392 /]# whoami
+root
 ```
-5.  
+5.  move into the file with the code! run the following
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+cd code
+```
+6.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
+```python
+python3 ml_data_analysis.py Meteorite_Landings.json
+```
+Your output should look like this: 
+```python
+Summary data following meteorite analysis:
+
+Average mass of 30 meteor(s): 83857.3
+
+Hemisphere summary data:
+There were 6  meteors found in the  Northern & Western Quadrant.
+There were 21  meteors found in the  Northern & Eastern Quadrant.
+There were 3  meteors found in the  Southern & Western Quadrant.
+There were 0  meteors found in the  Eastern & Western Quadrant.
+
+Class summary data:
+The   L5  class was found  1 times.
+The   H6  class was found  1 times.
+... etc!
 ```
 
+    
+## Run the containerized code against the sample data inside the container <a name="subparagraph1"></a>    
+    
+1. First you must complete either steps 1 or 2, but at least one. Ensure you are logged into the interactive shell successfully opened by testing pwd and whoami commands and getting following output:
+```python
+[root@1ca2af4a9392 /]# pwd
+/
+[root@1ca2af4a9392 /]# whoami
+root
+```
+2.  move into the file with the code! run the following
+```python
+cd code
+```
+3.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
+```python
+python3 ml_data_analysis.py Meteorite_Landings.json
+```
+Your output should look like this: 
+```python
+Summary data following meteorite analysis:
+
+Average mass of 30 meteor(s): 83857.3
+
+Hemisphere summary data:
+There were 6  meteors found in the  Northern & Western Quadrant.
+There were 21  meteors found in the  Northern & Eastern Quadrant.
+There were 3  meteors found in the  Southern & Western Quadrant.
+There were 0  meteors found in the  Eastern & Western Quadrant.
+
+Class summary data:
+The   L5  class was found  1 times.
+The   H6  class was found  1 times.
+... etc!
+```
+    
 ## Run the containerized code against user-provided data that they may have found on the web <a name="paragraph2"></a>
-1. 
+    
+You may start off this process with either processes 1 or 2, but you MUST STOP before running the `command`. For the sake of an example, I will follow process 1. If you choose to follow step 2 and creat your own Image, skip to step BLANK of this process    
+ 
+1. Go to my Dockerhub profile
+https://hub.docker.com/repository/docker/bryan4027/ml_data_analysis
+
+2. If you click on tags, you will see the latest version plus the older versions. The latest version is the option on the top. If you navigate to the right side of the screen, you will see a box with a copyable link which is the following
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+docker pull bryan4027/ml_data_analysis:hw04
 ```
-2. 
+3. Paste the previous command into the terminal. When complete, the output will look like following:
+```terminal
+PS C:\Users\bacos> docker pull bryan4027/ml_data_analysis:hw04
+hw04: Pulling from bryan4027/ml_data_analysis
+2d473b07cdd5: Pull complete
+5da5a235d053: Pull complete
+34b124c5e311: Pull complete
+262ce0fe5dcb: Pull complete
+68e4890295e5: Pull complete
+4095f3e4b287: Pull complete
+cef545f9340f: Pull complete
+e5defc447125: Pull complete
+Digest: sha256:93c81c90384f3bbc41cf93b5ca031ad0eeeee287deaf988a5b78e77acf492416
+Status: Downloaded newer image for bryan4027/ml_data_analysis:hw04
+docker.io/bryan4027/ml_data_analysis:hw04
+
+```
+4.  Within the same folder where you have the rest of the neccesary files, paste the following command to download the file you want to test. 
 ```python
-yum update
-```
-3.  
+wget https://<your_webstite_url_here>.com
+```  
+    
+5. Next, start the interactive shell by running the following! This command creates the image and loads all files in the current folder onto the container.
 ```python
-yum install python3
+docker run --rm -it -v $PWD:/data <username>/ml_data_analysis:<your_tag> /bin/bash
 ```
-4.  
+replace the <username> and <your_tag> with their respective names. Mine looks like this. 
 ```python
-pip3 install pytest==7.0.0
-```
-5.  
+docker run --rm -it -v $PWD:/data bryan4027/ml_data_analysis:hw04 /bin/bash
+```    
+6.  Check the interactive shell successfully opened by running the following two commands and the outputs should look like the following terminal output!
 ```python
-docker run --rm -it -v $PWD:/code centos:7.9.2009 /bin/bash
+[root@4e82e3d84ad6 /]# whoami
+root
+[root@4e82e3d84ad6 /]# pwd
+/
 ```
+6.  move into the file with the code! run the following
+```python
+cd code
+```
+7.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
+```python
+python3 ml_data_analysis.py Meteorite_Landings.json
+```
+Your output should look like this: 
+```python
+Summary data following meteorite analysis:
+
+Average mass of 30 meteor(s): 83857.3
+
+Hemisphere summary data:
+There were 6  meteors found in the  Northern & Western Quadrant.
+There were 21  meteors found in the  Northern & Eastern Quadrant.
+There were 3  meteors found in the  Southern & Western Quadrant.
+There were 0  meteors found in the  Eastern & Western Quadrant.
+
+Class summary data:
+The   L5  class was found  1 times.
+The   H6  class was found  1 times.
+... etc!
+```
+    
+1. First you must complete either steps 1 or 2, but at least one. Ensure you are logged into the interactive shell successfully opened by testing pwd and whoami commands and getting following output:
+```python
+[root@1ca2af4a9392 /]# pwd
+/
+[root@1ca2af4a9392 /]# whoami
+root
+```
+2.  move into the file with the code! run the following
+```python
+cd code
+```
+3.  You are finally able to run the program with all neccesary system installations and files! Test it out by pasting the following into the terminal.
+```python
+python3 ml_data_analysis.py Meteorite_Landings.json
+```
+Your output should look like this: 
+```python
+Summary data following meteorite analysis:
+
+Average mass of 30 meteor(s): 83857.3
+
+Hemisphere summary data:
+There were 6  meteors found in the  Northern & Western Quadrant.
+There were 21  meteors found in the  Northern & Eastern Quadrant.
+There were 3  meteors found in the  Southern & Western Quadrant.
+There were 0  meteors found in the  Eastern & Western Quadrant.
+
+Class summary data:
+The   L5  class was found  1 times.
+The   H6  class was found  1 times.
+... etc!
+```
+    
+    
 
 ## Run the containerized test suite with pytest <a name="paragraph3"></a>
 1. 
