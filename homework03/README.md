@@ -502,6 +502,7 @@ Python
     "utc_date": "Feb 19, 2022"
   },
 ```
+</details>
 5.  Start the Flask application so it is accessible from the web. Type the following into the terminal one by one. For the last program, replace the 5001 with your respective port.
 ```python: 
 export FLASK_APP=app.py
