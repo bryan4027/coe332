@@ -249,6 +249,7 @@ This second Python Script is used to test the correctness of the `app.py` file. 
 Python
 
 ```python:
+	
 import pytest
 from app import *
 
@@ -343,7 +344,7 @@ wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_OEM/ISS
 ```
 2. Observe the produced JSON file `ISS.OEM_J2K_EPH.xml` to ensure that the file was produced correctly. It should look like the following:
 <details>
-<summary>Dockerfile </summary>
+<summary>Show ISS.OEM_J2K_EPH.xml </summary>
 Python
 
 ```python:
@@ -461,171 +462,142 @@ Python
 ```
 </details>
     
-3. Download `cities.xml` by running the following into the terminal:
+3. Download `XMLsightingData_citiesINT01.xml` by running the following into the terminal:
 ```python:
-wget https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json
+wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_sightings/XMLsightingData_citiesINT01.xml
 ```
-4. Observe the produced JSON file `turbidity_data.json` to ensure that the file was produced correctly. It should look like the following:
+4. Observe the produced JSON file `XMLsightingData_citiesINT01.xml` to ensure that the file was produced correctly. It should look like the following:
+<details>
+<summary>Show XMLsightingData_citiesINT01.xml </summary>
+Python
+
 ```python:
 {
-  "turbidity_data": [
-    {
-      "datetime": "2022-02-01 00:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.022,
-      "detector_current": 1.137,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 01:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 0.975,
-      "detector_current": 1.141,
-      "analyzed_by": "C. Milligan"
-    },
+{
+    "country": "Belgium",
+    "region": "None",
+    "city": "Aalst",
+    "spacecraft": "ISS",
+    "sighting_date": "Thu Feb 17/07:07 AM",
+    "duration_minutes": "1",
+    "max_elevation": "10",
+    "enters": "10 above SE",
+    "exits": "10 above SE",
+    "utc_offset": "1.0",
+    "utc_time": "06:07",
+    "utc_date": "Feb 17, 2022"
+  },
+  {
+    "country": "Belgium",
+    "region": "None",
+    "city": "Aalst",
+    "spacecraft": "ISS",
+    "sighting_date": "Sat Feb 19/07:04 AM",
+    "duration_minutes": "5",
+    "max_elevation": "22",
+    "enters": "10 above SSW",
+    "exits": "10 above E",
+    "utc_offset": "1.0",
+    "utc_time": "06:04",
+    "utc_date": "Feb 19, 2022"
+  },
 ```
-3.  Run `analyze_water.py` to read in the JSON file and analyze it. enter the following into the command line: 
+5.  Start the Flask application so it is accessible from the web. Type the following into the terminal one by one. For the last program, replace the 5001 with your respective port.
 ```python: 
-python3 analyze_water.py
+export FLASK_APP=app.py
+export FLASK_ENV=development
+flask run -p 5001	
 ``` 
-4. Observe Output. When the water is safe the output will look like this:
+6. Observe Output. If the application was successfully loaded then the following will be outputed.
 ```python:
-     Avg Turbidity:  0.86
-INFO:root:Turbidity is safe for use.
-```
-and when the water is not safe, the output will look like this:
-```python:
- Avg Turbidity:  1.1444604
-WARNING:root:Warning: Turbidity is above threshold for safe use
-     Minimum time required to return below a safe threshold =  6.678969181162484
+ * Serving Flask app 'app.py' (lazy loading)
+ * Environment: development
+ * Debug mode: on
+ * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 106-306-171
 ```
     
-5. In order to run the next script, you will need to ensure that you have these next two JSON files within the directory. They are filled with DATA where it is easy to calculate the results and thus figure out if the function is working correctly. If you do not have either of them in the directory, please creat files named `datatest.json`and `datatest2.json`. Then copy paste the content accordingly.
-    
-a. First JSON file   
+7. In order to test the flask, open another terminal window and log back into your SSH server. Load the application using `curl localhost:5001/load_data -X POST`. That command will load all the data into the correct files. Then, you can see a list of instructions on how to use the application using `curl localhost:5001/help`. The output should look like this:
+```python:
+/help - (GET) - outputs instructions/help information.
+/load_data - (POST) - loads data into memory.
+/epoch - (GET) - Returns all EPOCHs.
+/epoch/<epoch> - (GET) - Returns information for requested epoch.
+/countries - (GET) - Returns information for all countries in data.
+/countries/<country> - (GET) - Returns all information for requested country.
+
+/countries/<country>/regions - (GET) - Returns all requested information for requested country.
+/countries/<country>/regions/<region> - (GET) - Returns all information for requested region.
+/countries/<country>/regions/<region>/cities - (GET) - Returns all information for all cities.
+/countries/<country>/regions/<region>/city - (GET) - Returns all information for requested city.	
+	
+```	
+8. You can now interact with and use the Flask application to observe the data. You can use `curl localhost:5001/countries/Belgium/regions/None/cities/Wervik` to see the data of the sightings observed in the city of Wervik in Belgium. Test out other data by starting with `curl localhost:5001/countries` and following the instructions from there.
+9. You can now test the program is running correctly by running `pytest emacs pytest_app.py` and the output should look like this if it ran correctly:
+```python:
+============================ test session starts ============================
+platform linux -- Python 3.6.8, pytest-7.0.1, pluggy-1.0.0
+rootdir: /home/ba25389/332/midterm/International-Space-Station-Tracking
+collected 8 items
+
+pytest_app.py ........                                                [100%]
+
+============================= 8 passed in 1.26s =============================
+	
+```
+10. Run the Makefile to build the Docker Image. Run `Make all`
 <details>
-<summary>Show python script 1: generate_sites.py</summary>
-    
-JSON
-```python:
-{
-  "turbidity_data": [
-    {
-      "datetime": "2022-02-01 00:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 01:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 02:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 03:00",
-      "sample_volume": 1.18,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "R. Zhang"
-    },
-    {
-      "datetime": "2022-02-01 04:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "J. Maertz"
-    },
-    {
-      "datetime": "2022-02-01 05:00",
-      "sample_volume": 1.17,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "K. Judkins"
-    },
-    {
-      "datetime": "2022-02-01 06:00",
-      "sample_volume": 1.24,
-      "calibration_constant": 1.0,
-      "detector_current": 1.1992,
-      "analyzed_by": "F. Zhou"
-    } ] }    
+<summary>Show output </summary>
+Python
+
+```python:	 	
+Sending build context to Docker daemon  5.352MB
+Step 1/14 : FROM centos:7.9.2009
+ ---> eeb6ee3f44bd
+Step 2/14 : RUN yum update -y && yum install -y python3
+ ---> Using cache
+ ---> d605a0dae43f
+Step 3/14 : RUN pip3 install pytest==7.0.0
+ ---> Using cache
+ ---> f4be093b12b2
+Step 4/14 : RUN pip3 install --user xmltodict
+ ---> Using cache
+ ---> 34959355fb0b
+Step 5/14 : RUN mkdir /code
+ ---> Using cache
+ ---> ea5ed6ac6547
+Step 6/14 : RUN pip3 install flask
+ ---> Using cache
+ ---> 35feace33255
+Step 7/14 : COPY app.py /code/app.py
+ ---> Using cache
+ ---> 62a624a13d4c
+Step 8/14 : COPY pytest_app.py /code/pytest_app.py
+ ---> 0316dfd3d98f
+Step 9/14 : COPY cities.xml /code/cities.xml
+ ---> 819d589968b7
+Step 10/14 : COPY positions.xml /code/positions.xml
+ ---> e151f2ebbe76
+Step 11/14 : COPY . /app
+ ---> d0bcba186a2e
+Step 12/14 : RUN chmod +rx /code/app.py
+ ---> Running in a69b09c4989b
+Removing intermediate container a69b09c4989b
+ ---> 693488abb066
+Step 13/14 : RUN chmod +rx /code/pytest_app.py
+ ---> Running in cce0b7ffc546
+Removing intermediate container cce0b7ffc546
+ ---> 5cb7aa2d2e18
+Step 14/14 : ENV PATH "/code:$PATH"
+ ---> Running in b88a4d3232ee
+Removing intermediate container b88a4d3232ee
+ ---> d939ea72f19d
+Successfully built d939ea72f19d
+Successfully tagged bryan4027/iss_tracking10:1.3
+docker run --name "iss_tracking10" -it -p 5001:5000 bryan4027/iss_tracking10:1.3
 ```
-</details>
-    
-b. and the second JSON file:
-    
-<details>
-<summary>Show python script 1: generate_sites.py</summary>
-    
-JSON
-```python:
-{
-  "turbidity_data": [
-    {
-      "datetime": "2022-02-01 00:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 01:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 02:00",
-      "sample_volume": 1.15,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "C. Milligan"
-    },
-    {
-      "datetime": "2022-02-01 03:00",
-      "sample_volume": 1.18,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "R. Zhang"
-    },
-    {
-      "datetime": "2022-02-01 04:00",
-      "sample_volume": 1.19,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "J. Maertz"
-    },
-    {
-      "datetime": "2022-02-01 05:00",
-      "sample_volume": 1.17,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "K. Judkins"
-    },
-    {
-      "datetime": "2022-02-01 06:00",
-      "sample_volume": 1.24,
-      "calibration_constant": 1.0,
-      "detector_current": 1.4632,
-      "analyzed_by": "F. Zhou"
-    } ] }  
-```
-</details>
-    
-6. Run `test_analyze_water.py` to test the `analyze_water.py` correctness. enter the following into the command line:
-```python:
-python3 test_analyze_water.py
-```
+</details>	
 
 7. Observe the results - if it runs and does not display anything, then the code is correct. Otherwise, there is an error somewhere in your code, whether in function, inputs, variables, or more, depending on the output text.
