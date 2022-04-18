@@ -1,141 +1,471 @@
-# This folder belongs to Bryan Acosta's homework 3.
+# This folder belongs to Bryan Acosta's nternational-Space-Station-Tracking Midterm Project.
 Eid ba25389. TACC id: ba25389.
 
-# Analyzing Mar's Rover's Collected Data
-The purpose of this project is to read in a JSON file of the collected data, analyze it, and determine if the water is safe for sample testing. It determines this based off the 5 most recent data points. This project enhances my skills with JSON manipulation, huge list manipulation, Python organization, documentation, logging, unit testing, and more.
+# Tracking the International Space Station
+The purpose of this project is to read in a data set directly from NASA's website and use that data to find information of where the ISS has been spotted throughout the world. It orgnizaes the data in JSON format where it has information about sightings including but not limited to the country, region, and city the sighting took place. The application created is made into a flask application than can be accessed from other computers. The application is then tested with a PyTest application, ran with a Makefile and containerized using Docker which is built using the Makefile.
 
 # Part 1 Python Script:
-This python script's purpose is to read in a JSON file and calculate the average turbidity of the 5 most recent data points. It decided whether the water is safe or not for testing the samples. Then, it uses that value to calculate the minimum amount of hours neccesary for the water to be safe.
+This python script's purpose is to read in a xml file, converted to JSON format, and manipulating the data using different loops and strategies to search through the data.
 
 <details>
-<summary>Show python script 1: analyze_water.py</summary>
+<summary>Show python script 1: app.py</summary>
 Python
 
 ```python:
+from flask import Flask
+import xmltodict
 import json
-import math
 import logging
-logging.basicConfig(level=logging.DEBUG)
-def calculate_turbidity(datavec: list) -> float:
+import sys
+app = Flask(__name__)
+
+
+@app.route('/load_data', methods = ['POST'])
+def load_data_into_file():
+    
+    logging.info('Files have been loaded into the memory.\n')
+    global positions 
+    global sightings
+    with open('positions.xml','r') as pos:
+        positions = xmltodict.parse(pos.read())
+    with open('cities.xml', 'r') as cities:
+        sightings = xmltodict.parse(cities.read())
+
+        return 'Data loading is complete.\n'
+
+# All the GET Defintions
+
+@app.route('/help', methods=['GET'])
+def return_instructions():
     '''
-    This function:
-         This function reads in a list of data points recorded real time, takes the last 5 data points and calculates the average Turbidity and returns it
-    Args:
-         datavec (list): The input is a list of dictionaries with the following values: datetime - a date in the format of a string, sample_volume - a double, calibration_constant - a double, detector_current - a double,  analyzed_by - a string
-    Returns:
-         this function returns the average turbidity of the last five data points recorded
+    This Route returns all of the available commands and instructions on
+    how to use them.
     '''
-    x = -5
-    global lastfivedicts
-    lastfivedicts = []
+    logging.info("Instructions on requesting data printed below.")
+    output = "/help - (GET) - outputs instructions/help information."
+    output = output + "\n/load_data - (POST) - loads data into memory. "
+    output = output + "\n/epoch - (GET) - Returns all EPOCHs. "
+    output = output + "\n/epoch/<epoch> - (GET) - Returns information for requested epoch. " 
+    output = output + "\n/countries - (GET) - Returns information for all countries in data. "
+    output = output + "\n/countries/<country> - (GET) - Returns all information for requested country. "
+    output = output + "\n/countries/<country>/regions - (GET) - Returns all requested information for requested country."
+    output = output + "\n/countries/<country>/regions/<region> - (GET) - Returns all information for requested region. "
+    output = output + "\n/countries/<country>/regions/<region>/cities - (GET) - Returns all information for all cities."
+    output = output + "\n/countries/<country>/regions/<region>/city - (GET) - Returns all information for requested city. "
+
+    return output
+
+@app.route('/epoch', methods=['GET'])
+def return_epoch():
+    """
+    This route grabs all of the epochs and makes it a list.
+    Return: it returns the list of epochs
+    """
+    output = "\n"
+    logging.info("Looking for all of the Epoch Positions\n")
+    global epoch_length
+    global epoch_list #also output
+    global epoch_data
+    epoch_list = ""
+    epoch_data = positions['ndm']['oem']['body']['segment']['data']['stateVector']
+    epoch_length = len(epoch_data)
+    for i in range(epoch_length):
+        epoch_list = epoch_list + epoch_data[i]['EPOCH'] + '\n'
+
+    return epoch_list
+
+@app.route('/epoch/<epoch>', methods=['GET'])
+def return_specific_epoch(epoch: str):
+    """
+    Input: This route reads in an input indicating which epoch's information is requested
+    The route loops through the list of epochs and returns the data for the requested epoch. 
+    Output: The route outputs the requested epoch's information in the form of a JSON
+    """
+    logging.info("Looking for requested epoch")
+    epoch_data = positions['ndm']['oem']['body']['segment']['data']['stateVector']
+    output_list = []
+    for pos in range(len(epoch_data)):
+        current_epoch = epoch_data[pos]['EPOCH']
+        if epoch == current_epoch:
+            specific_epoch_data = epoch_data[pos]
+            output_list.append(specific_epoch_data)
     
-    for i in range(0,5):
-            lastfivedicts.append(datavec[x])
-            x = x+1
-    avgturb = 0
-    for i in range(0,len(lastfivedicts)):
-        calibration_const = float(lastfivedicts[i]['calibration_constant'])
-        current = float(lastfivedicts[i]['detector_current'])
-        avgturb = avgturb + (calibration_const*current)
-    avgturb = avgturb/(len(lastfivedicts))
-    return avgturb
+    return json.dumps(output_list, indent=2)
+                 
+@app.route('/countries', methods=['GET'])
+def return_all_countries():
+    """
+    This route loops through all of the data and returns the countries that are included with data in a list. 
+    The route outputs the list of countries in the data
+    """
+    logging.info("Looking for all countries")
+    global sighting_data
+    global sighting_list
+    global sighting_n
+    global country_list
+    country_list = ""
+    sighting_data = sightings['visible_passes']['visible_pass']
+    sighting_n = len(sighting_data)
+    for country in range(sighting_n):
+        current_country = sighting_data[country]['country']
+        if current_country not in country_list:
+            country_list = country_list + current_country + '\n'
+        
+    return country_list  
+@app.route('/countries/<country>', methods=['GET'])
+def return_specific_country(country: str):
+    """
+    Input: this route inputs a string for a requested country from the outputed list from the /countries route
     
+    the route iterates through the data and compiles all the data that goes through the requested country and puts it into a JSON formatted list
+    output: the route outputs JSON formatted data for all the positons above the requested country.
+    """
+    logging.info("Looking for requested country")
+    sighting_data = sightings['visible_passes']['visible_pass']
+    #needed_index = sighting_data.index(country)
+    needed_data = ['region', 'city', 'spacecraft', 'sighting_date','duration_minutes','max_elevation','enters','exits','utc_offset','utc_time', 'utc_date']
+    output_list = []
+    for sighting in range(len(sighting_data)):
+        current_country = sighting_data[sighting]['country']
+        if country == current_country:
+            country_data = sighting_data[sighting]
+            output_list.append(country_data)
 
-def calculate_minimum_time(avgturb: float) -> float:
-'''
-    This function:
-         This function reads in the average turbidity of the 5 most recent data points, uses the given equation to calculate the minimum amount of time required, and returns it
-    Args:
-         avgturb is the average turbidity of the 5 most recent data points. it is always a float.
-    Returns:
-         this function returns the the amount of time that it takes for the turbidity to get to a safe value. 
-'''
-    global hour
-    hour = 0
-    hour  = math.log((1/avgturb),0.98)
-    return (hour)
+    return json.dumps(output_list, indent  = 2)
 
-def printstuff(avgturb: float, time: float) ->None:
-    print("\n     Avg Turbidity: ",avgturb)
-    if (avgturb >= 1):
-        logging.warning('Warning: Turbidity is above threshold for safe use ')
-        print ("     Minimum time required to return below a safe threshold = ",hour, "\n")
-    if (avgturb < 1):
-        logging.info ('Turbidity is safe for use. \n' )
-    
-    
-def main():
+        
+@app.route('/countries/<country>/regions', methods=['GET'])
+def return_regions(country: str):
+    """
+    input: the route requests a specific country so that it can get the data from that coutnry.
+    the route iterates through the outputted json formatted data from the previous route to find all data positioned over a specific region.
+    output: it returns a string list of all of the regions
+    """
+    logging.info("looking for list of all regions")
+    regions_list = ""
+    output_list = []
+    sighting_data = sightings['visible_passes']['visible_pass']
+    for sighting in range(len(sighting_data)):
+        current_country = sighting_data[sighting]['country']
+        if current_country == country:
+            country_data = sighting_data[sighting]
+            output_list.append(country_data)
+    #output_json = json.dumps(output_list, indent  = 2)
+    for sighting in range(len(output_list)):
+        current_region = output_list[sighting]['region']
+        if current_region not in regions_list:
+            regions_list = regions_list + current_region + '\n'
+    return regions_list
 
-    with open('turbidity_data.json', 'r') as f:
-        datavec = json.load(f)
+@app.route('/countries/<country>/regions/<region>', methods=['GET'])
+def return_a_region(country: str, region: str):
+    """
+    Input: the route requests an input for a country and region to specify which country and region you want to search for data
+    the route iterates through the data and compiles all of the data from the requested region into a JSON format.
+    output: this outputs all of the positions that are within the requested country and requested region.
+    """
+    logging.info("Currently looking for data within requested region")
+    output_list = []
+    region_data = []
+    sighting_data = sightings['visible_passes']['visible_pass']
+    for sighting in range(len(sighting_data)):
+        current_country = sighting_data[sighting]['country']
+        if current_country == country:
+            country_data = sighting_data[sighting]
+            output_list.append(country_data)
+    for sighting in range(len(output_list)):
+        
+        if region == output_list[sighting]['region']:
+            region_data.append(output_list[sighting])
 
-    turb  = calculate_turbidity(datavec['turbidity_data'])
-    time = calculate_minimum_time(turb)
-    printstuff(turb, time)
+    return json.dumps(region_data, indent=2)
 
+@app.route('/countries/<country>/regions/<region>/cities', methods=['GET'])
+def return_cities(country: str, region: str):
+    """
+    Input: the route requests an input for a country and region to specify which country and region you want to search for data
+    the route iterates through the data for the requested country and region to compile a list of all the cities in the data. The list is inputted into a string.
+    Output: The route outputs the string, a list of all the cities in the requested data.
+    """
+    logging.info("Currently looking for list of cities")
+    output_list = []
+    region_data = []    
+    sighting_data = sightings['visible_passes']['visible_pass']
+    for sighting in range(len(sighting_data)):
+        current_country = sighting_data[sighting]['country']
+        if current_country == country:
+            country_data = sighting_data[sighting]
+            output_list.append(country_data)
+    for sighting in range(len(output_list)):
+        if region == output_list[sighting]['region']:
+            region_data.append(output_list[sighting])
+            
+    city_list = ""
+    for data in range(len(region_data)):
+        current_city = region_data[data]['city']
+        if current_city not in city_list:
+            city_list = city_list + current_city+ '\n'
+
+    return city_list
+@app.route('/countries/<country>/regions/<region>/cities/<city>', methods=['GET'\
+])
+def return_a_city(country: str, region: str,city: str):
+    """
+    input: the route requests a country, region, and city where the user wants to grab the data from. They are all strings.
+    The route iterates through the list of data that pertains to the requested city and compiles it onto a JSON formatted list.
+    output: The route outputs a JSON formatted compilation of data within a city.
+    """
+    logging.info("Currently looking for specific city")
+    output_list = []
+    region_data = []
+    city_data = []
+    sighting_data = sightings['visible_passes']['visible_pass']
+    for sighting in range(len(sighting_data)):
+        current_country = sighting_data[sighting]['country']
+        if current_country == country:
+            country_data = sighting_data[sighting]
+            output_list.append(country_data)
+    for sighting in range(len(output_list)):
+        if region == output_list[sighting]['region']:
+            region_data.append(output_list[sighting])
+    for sighting in range(len(region_data)):
+        if city == region_data[sighting]['city']:
+            city_data.append(region_data[sighting])
+
+    return json.dumps(city_data,indent=2)
 
 if __name__ == '__main__':
-    main()
+    app.run(debug=True, host='0.0.0.0')
+
+    
 ```
 </details>
 
-# Part 2 Python Script:
-This second Python Script is used to test the correctness of the `analyze_water.py` file. It uses unit testing to individually test if the functions input and output are correct, if the variables are correct types and amounts, and more using Pytest.
+# Part 2 Test Python Script:
+This second Python Script is used to test the correctness of the `app.py` file. It uses unit testing to individually test if the functions input and output are correct and more using Pytest.
 
 <details>
-<summary>Show python script 2: test_analyze_water.py </summary>
+<summary>Show python script 2: test_app.py </summary>
 Python
 
 ```python:
-
 import pytest
-import json
-from analyze_water import calculate_turbidity
-from analyze_water import calculate_minimum_time
-from analyze_water import main
-
-def test_calculate_turbidity():
-    with open('datatest.json', 'r') as f:
-        testdata = json.load(f)
-    with open('datatest2.json', 'r') as f:
-        testdata2 = json.load(f)
-        
-
-    assert(calculate_turbidity(testdata['turbidity_data']) == 1.1992)
-    assert isinstance(calculate_turbidity(testdata['turbidity_data']), float) == True
-    assert isinstance(calculate_turbidity(testdata['turbidity_data']), str) != True
-    assert(calculate_turbidity(testdata2['turbidity_data']) == 1.4632)
-    assert(calculate_turbidity(testdata2['turbidity_data']) != 1.8482)
-
-1.4632    
-    #assert isinstance(calculate_turbidity([{'a': 1}, {'a': 2}], 'a'), float)
-    #assert isinstance(calculate_turbidity([{'a': 1}, {'a': 2}], 'a'), float)
-
-def test_calculate_minimum_time():
-
-    assert(calculate_minimum_time(1.1992) == 8.991600232149228)
-    assert(calculate_minimum_time(1.3422) == 14.567852422768159)
-    assert(calculate_minimum_time(1.4244) == 17.510062728806584)
-    assert isinstance(calculate_minimum_time(1.4244), float) == True
-    assert isinstance(calculate_minimum_time(1.4244), str) == False
-
-def pytest():
-
-    test_calculate_turbidity()
-    test_calculate_minimum_time()
+from app import *
 
 
-if __name__ == '__pytest__':
-    pytest()
+load_data_into_file()
+def return_instructions():
+    assert isinstance(return_instructions(),str)==True
+
+def test_return_epoch():
+    assert isinstance(return_epoch(),str)==True
+
+def test_return_specific_epoc():
+    assert isinstance(return_specific_epoch('2022-057T11:48:56.869Z'),dict)!=True
+
+def test_return_all_countries():
+    assert isinstance(return_all_countries(),str)==True
+
+def test_return_specific_country():
+    assert isinstance(return_specific_country('Belgium'),dict)!=True
+
+def test_return_regions():
+    assert isinstance(return_regions('Belgium'),str)==True
+
+def test_return_a_region():
+    assert isinstance(return_a_region('Belgium', 'None'),dict)!=True
+def test_return_cities():
+    assert isinstance(return_cities('Belgium','None'),str)==True
+def test_return_a_city():
+    assert isinstance(return_a_city('Belgium','None','Wervik'),dict)!=True
+
 ```
 </details>
 
+# Part 3 Make File Script:
+This File is used to build, containerize, run, and push the folder onto Docker. 
+
+<details>
+<summary>Show python script 2: Makefile </summary>
+Python
+
+```python:
+all: build run push
+
+images:
+	docker images | grep bryan4027
+ps:
+	docker ps -a | grep bryan4027
+build:
+	docker build -t bryan4027/iss_tracking10:1.3 .
+run:
+	docker run --name "iss_tracking10" -it -p 5001:5000 bryan4027/iss_tracking10:1.3
+push:
+	docker push bryan4027/iss_tracking0:1.3	  
+    
+```
+</details>
+
+# Part 4 Dockerfile Script:
+This File is used to build, containerize, and set up the Docker Image so that it is ready to run the application without having to manually install anything.
+
+<details>
+<summary>Dockerfile </summary>
+Python
+
+```python:
+FROM centos:7.9.2009
+
+RUN yum update -y && yum install -y python3
+RUN pip3 install pytest==7.0.0
+RUN pip3 install --user xmltodict
+RUN mkdir /code
+RUN pip3 install flask
+
+COPY app.py /code/app.py
+COPY pytest_app.py /code/pytest_app.py
+COPY cities.xml /code/cities.xml
+COPY positions.xml /code/positions.xml
+COPY . /app
+
+RUN chmod +rx /code/app.py
+RUN chmod +rx /code/pytest_app.py
+
+ENV PATH "/code:$PATH"
+    
+```
+</details>
+    
 # Instructions for Program: 
-1. Download `turbidity_data.json` by running the following into the terminal:
+1. Download `positions.xml` by running the following into the terminal:
+```python:
+wget https://nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_OEM/ISS.OEM_J2K_EPH.xml
+```
+2. Observe the produced JSON file `ISS.OEM_J2K_EPH.xml` to ensure that the file was produced correctly. It should look like the following:
+<details>
+<summary>Dockerfile </summary>
+Python
+
+```python:
+{
+{
+   "oem": {
+      "@id": "CCSDS_OEM_VERS",
+      "@version": "2.0",
+      "header": {
+         "CREATION_DATE": "2022-042T18:53:27.821Z",
+         "ORIGINATOR": "JSC"
+      },
+      "body": {
+         "segment": {
+            "metadata": {
+               "OBJECT_NAME": "ISS",
+               "OBJECT_ID": "1998-067-A",
+               "CENTER_NAME": "EARTH",
+               "REF_FRAME": "EME2000",
+               "TIME_SYSTEM": "UTC",
+               "START_TIME": "2022-042T12:00:00.000Z",
+               "STOP_TIME": "2022-057T12:00:00.000Z"
+            },
+            "data": {
+               "COMMENT": [
+                  "Units are in kg and m^2",
+                  "MASS=445386.00",
+                  "DRAG_AREA=1439.70",
+                  "DRAG_COEFF=3.40",
+                  "SOLAR_RAD_AREA=0.00",
+                  "SOLAR_RAD_COEFF=0.00",
+                  "Orbits start at the ascending node epoch",
+                  "ISS first asc. node: EPOCH = 2022-02-11T12:08:41.500 $ ORBIT = 568 $ LAN(DEG) = -84.71503",
+                  "ISS last asc. node : EPOCH = 2022-02-26T11:10:09.027 $ ORBIT = 800 $ LAN(DEG) = -158.91754",
+                  "Begin sequence of events",
+                  "TRAJECTORY EVENT SUMMARY:",
+                  [],
+                  "|       EVENT        |       TIG        | ORB |   DV    |   HA    |   HP    |",
+                  "|                    |       GMT        |     |   M/S   |   KM    |   KM    |",
+                  "|                    |                  |     |  (F/S)  |  (NM)   |  (NM)   |",
+                  "=============================================================================",
+                  "80P Launch            046:04:25:40.000             0.0     426.3     408.0",
+                  "(0.0)   (230.2)   (220.3)",
+                  [],
+                  "80P Arrivals          048:07:06:29.000             0.0     425.6     408.2",
+                  "(0.0)   (229.8)   (220.4)",
+                  [],
+                  "NG-17 Launch          050:17:39:59.000             0.0     425.4     408.4",
+                  "(0.0)   (229.7)   (220.5)",
+                  [],
+                  "NG-17 Arrival         052:09:35:00.000             0.0     424.8     408.6",
+                  "(0.0)   (229.4)   (220.6)",
+                  [],
+                  "GMT057 Reboost        057:01:37:00.000             0.4     423.8     409.1",
+                  "(1.3)   (228.8)   (220.9)",
+                  [],
+                  "=============================================================================",
+                  "End sequence of events"
+               ],
+               "stateVector": [
+                  {
+                     "EPOCH": "2022-042T12:00:00.000Z",
+                     "X": {
+                        "@units": "km",
+                        "#text": "-4945.2048874258298"
+                     },
+                     "Y": {
+                        "@units": "km",
+                        "#text": "-3625.9704508659102"
+                     },
+                     "Z": {
+                        "@units": "km",
+                        "#text": "-2944.7433487186099"
+                     },
+                     "X_DOT": {
+                        "@units": "km/s",
+                        "#text": "1.19203952554952"
+                     },
+                     "Y_DOT": {
+                        "@units": "km/s",
+                        "#text": "-5.67286420497775"
+                     },
+                     "Z_DOT": {
+                        "@units": "km/s",
+                        "#text": "4.99593211898374"
+                     }
+                  },
+                  {
+                     "EPOCH": "2022-042T12:04:00.000Z",
+                     "X": {
+                        "@units": "km",
+                        "#text": "-4483.2181885642003"
+                     },
+                     "Y": {
+                        "@units": "km",
+                        "#text": "-4839.4374260438099"
+                     },
+                     "Z": {
+                        "@units": "km",
+                        "#text": "-1653.1850590663901"
+                     },
+                     "X_DOT": {
+                        "@units": "km/s",
+                        "#text": "2.63479158884966"
+                     },
+                     "Y_DOT": {
+                        "@units": "km/s",
+                        "#text": "-4.3774148889971602"
+                     },
+                     "Z_DOT": {
+                        "@units": "km/s",
+                        "#text": "5.7014974180323597"
+                     }
+                  },
+```
+</details>
+    
+3. Download `cities.xml` by running the following into the terminal:
 ```python:
 wget https://raw.githubusercontent.com/wjallen/turbidity/main/turbidity_data.json
 ```
-2. Observe the produced JSON file `turbidity_data.json` to ensure that the file was produced correctly. It should look like the following:
+4. Observe the produced JSON file `turbidity_data.json` to ensure that the file was produced correctly. It should look like the following:
 ```python:
 {
   "turbidity_data": [
